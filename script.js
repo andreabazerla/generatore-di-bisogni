@@ -176,10 +176,10 @@ function aggiornaGradiente() {
 
 // PARAMETRI CONFIGURABILI
 const SECONDI_MIN = 1;  // Secondi minimi prima del cambio (12 ore = 43200 secondi)
-const SECONDI_MAX = 10;  // Secondi massimi prima del cambio (24 ore = 86400 secondi)
+const SECONDI_MAX = 60;  // Secondi massimi prima del cambio (24 ore = 86400 secondi)
 
 // Data di inizio: prima scritta comparsa il 17/12/2025 alle 23:28:00
-const DATA_INIZIO = new Date('2025-12-17T23:29:00').getTime();
+const DATA_INIZIO = new Date('2025-12-18T00:00:00').getTime();
 
 // Le scritte verranno caricate dal file JSON
 let SCRITTE = [];
