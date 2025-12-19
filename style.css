@@ -192,3 +192,34 @@ body {
     font-size: 36px;
   }
 }
+
+/* Fumetto (speech bubble) per la emoji */
+.speech-bubble {
+  position: fixed;
+  z-index: 10000;
+  background: rgba(255,255,255,0.97);
+  color: #111;
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  max-width: 260px;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: opacity 200ms ease, transform 200ms cubic-bezier(.2,.9,.2,1);
+  pointer-events: auto;
+}
+.speech-bubble span { margin: 6px 0; }
+.speech-bubble span:first-child { margin-top: 0; font-weight: 700; }
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 12px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 10px solid rgba(255,255,255,0.97);
+}
+.speech-bubble.hidden { opacity: 0; transform: translateY(-6px) scale(0.98); pointer-events: none; }
+.speech-bubble.visible { opacity: 1; transform: translateY(0) scale(1); }

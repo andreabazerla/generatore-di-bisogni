@@ -323,7 +323,7 @@ function createShareButton() {
 
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'Bisogno', text });
+        await navigator.share({ title: 'Bisogno', text: 'Bisogno del giorno: "' + text + '"' });
         return;
       } catch (e) {
         // fall through to clipboard
@@ -366,8 +366,66 @@ function createStopSign() {
   stop.className = 'stop-sign';
   stop.textContent = '😛';
   stop.setAttribute('aria-label', 'Segnale di stop');
+  stop.setAttribute('tabindex', '0');
 
   document.body.appendChild(stop);
+
+  // Crea il fumetto (nascosto di default)
+  const bubble = document.createElement('div');
+  bubble.id = 'stopBubble';
+  bubble.className = 'speech-bubble hidden';
+  bubble.setAttribute('role', 'dialog');
+  bubble.setAttribute('aria-hidden', 'true');
+  bubble.innerHTML = `
+    <span>Ciao Valentina! 👋 Sono Andrea 😊</span>
+    <span>, e ti do il benvenuto nel primo generatore di bisogni casuali. 🎁 Ti ho dedicato questo sito come pensiero scherzoso per Natale 2025, 🎄 per ricordarti quanto mi preoccupo per te anche quando non siamo vicini. 💕 Spero che ti piaccia! Buon Natale amore, ti amo ❤️</span>
+  `;
+  document.body.appendChild(bubble);
+
+  // Posiziona il fumetto a destra della emoji
+  function positionBubble() {
+    const rect = stop.getBoundingClientRect();
+    const left = rect.right + 10; // spazio a destra
+    const top = rect.top;
+    bubble.style.left = left + 'px';
+    bubble.style.top = top + 'px';
+  }
+  positionBubble();
+  window.addEventListener('resize', positionBubble);
+  window.addEventListener('scroll', positionBubble, { passive: true });
+
+  function showBubble() {
+    bubble.classList.remove('hidden');
+    bubble.classList.add('visible', 'pop');
+    bubble.setAttribute('aria-hidden', 'false');
+    setTimeout(() => bubble.classList.remove('pop'), 600);
+  }
+  function hideBubble() {
+    bubble.classList.remove('visible', 'pop');
+    bubble.classList.add('hidden');
+    bubble.setAttribute('aria-hidden', 'true');
+  }
+
+  let visible = false;
+  stop.addEventListener('click', (e) => {
+    e.stopPropagation();
+    positionBubble();
+    visible = !visible;
+    if (visible) showBubble(); else hideBubble();
+  });
+
+  // Accessibilità: toggle anche con tastiera
+  stop.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop.click(); }
+  });
+
+  // Nascondi se si clicca fuori
+  document.addEventListener('click', (e) => {
+    if (!bubble.contains(e.target) && !stop.contains(e.target) && visible) {
+      visible = false;
+      hideBubble();
+    }
+  });
 }
 
 // ============================================
@@ -375,11 +433,11 @@ function createStopSign() {
 // ============================================
 
 // PARAMETRI CONFIGURABILI
-const SECONDI_MIN = 12;  // Secondi minimi prima del cambio (12 ore = 43200 secondi)
-const SECONDI_MAX = 24;  // Secondi massimi prima del cambio (24 ore = 86400 secondi)
+const SECONDI_MIN = 60*60*12;  // Secondi minimi prima del cambio (12 ore = 43200 secondi)
+const SECONDI_MAX = 60*60*24;  // Secondi massimi prima del cambio (24 ore = 86400 secondi)
 
 // Data di inizio: prima scritta comparsa il 17/12/2025 alle 23:28:00
-const DATA_INIZIO = new Date('2025-12-19T00:00:00').getTime();
+const DATA_INIZIO = new Date('2025-12-19T18:00:00').getTime();
 
 // Le scritte verranno caricate dal file JSON
 let SCRITTE = [];
