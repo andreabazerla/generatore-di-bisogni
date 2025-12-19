@@ -364,7 +364,7 @@ function createStopSign() {
   const stop = document.createElement('div');
   stop.id = 'stopSign';
   stop.className = 'stop-sign';
-  stop.textContent = '🛑';
+  stop.textContent = '😛';
   stop.setAttribute('aria-label', 'Segnale di stop');
 
   document.body.appendChild(stop);
