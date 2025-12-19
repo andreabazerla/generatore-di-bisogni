@@ -378,7 +378,9 @@ function createStopSign() {
   bubble.setAttribute('aria-hidden', 'true');
   bubble.innerHTML = `
     <span>Ciao Valentina! 👋 Sono Andrea 😊</span>
-    <span>, e ti do il benvenuto nel primo generatore di bisogni casuali. 🎁 Ti ho dedicato questo sito come pensiero scherzoso per Natale 2025, 🎄 per ricordarti quanto mi preoccupo per te anche quando non siamo vicini. 💕 Spero che ti piaccia! Buon Natale amore, ti amo ❤️</span>
+    <span>, e ti do il benvenuto nel primo generatore di bisogni casuali. 🎁</span><br><br>
+    <span>Ti ho dedicato questo sito come pensiero scherzoso per Natale 2025, 🎄 per ricordarti quanto mi preoccupo per te anche quando non siamo vicini. 💕</span><br><br>
+    <span>Spero che ti piaccia! Buon Natale amore, ti amo ❤️</span>
   `;
   document.body.appendChild(bubble);
 
@@ -615,15 +617,26 @@ setInterval(aggiornaInterfaccia, 1000);
 const customCursor = document.querySelector('.custom-cursor');
 
 // Lista di file audio (caricata dinamicamente da `stop/list.json`)
-let audioFiles = [];
-
-// Carica il manifest dei file audio (non mettere i nomi direttamente nel codice)
-fetch('stop/list.json')
-  .then(res => res.json())
-  .then(list => {
-    if (Array.isArray(list) && list.length) audioFiles = list;
-  })
-  .catch(err => console.warn('Impossibile caricare stop/list.json:', err));
+// Lista di file audio (inserita direttamente nello script)
+let audioFiles = [
+  "WhatsApp Ptt 2025-12-19 at 15.49.04.mp3",
+  "WhatsApp Ptt 2025-12-19 at 15.49.13.mp3",
+  "WhatsApp Ptt 2025-12-19 at 15.49.28.mp3",
+  "WhatsApp Ptt 2025-12-19 at 15.52.44.mp3",
+  "WhatsApp Ptt 2025-12-19 at 15.52.48.mp3",
+  "WhatsApp Ptt 2025-12-19 at 15.52.54.mp3",
+  "WhatsApp Ptt 2025-12-19 at 15.52.58.mp3",
+  "WhatsApp Ptt 2025-12-19 at 15.53.01.mp3",
+  "WhatsApp Ptt 2025-12-19 at 16.00.25.mp3",
+  "WhatsApp Ptt 2025-12-19 at 18.08.59.mp3",
+  "WhatsApp Ptt 2025-12-19 at 18.09.02.mp3",
+  "WhatsApp Ptt 2025-12-19 at 18.09.10.mp3",
+  "WhatsApp Ptt 2025-12-19 at 18.09.14.mp3",
+  "WhatsApp Ptt 2025-12-19 at 18.09.17.mp3",
+  "WhatsApp Ptt 2025-12-19 at 18.09.32.mp3",
+  "WhatsApp Ptt 2025-12-19 at 18.10.23.mp3",
+  "WhatsApp Ptt 2025-12-19 at 18.10.32.mp3"
+];
 
 // Funzione per riprodurre audio casuale (usa `audioFiles` caricati dal manifest)
 function playRandomAudio() {
