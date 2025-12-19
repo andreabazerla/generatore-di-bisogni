@@ -168,7 +168,7 @@ function applyBackground(angleDeg) {
 }
 
 // Imposta gradiente iniziale in modo che l'animazione angolare non parta con valori vuoti
-const ANIM_SETTINGS = { amplitude: 6, periodMs: 20000 };
+const ANIM_SETTINGS = { amplitude: 18, periodMs: 8000 };
 try {
   const _init = calcolaGradiente();
   CURRENT_GRADIENT.top = (_init.top && _init.top.startsWith && _init.top.startsWith('#')) ? rgbToCss(parseColorToRgb(_init.top)) : (_init.top || 'rgb(0,0,0)');
