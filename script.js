@@ -551,4 +551,54 @@ setInterval(aggiornaGradiente, 60000);
 // Aggiorna interfaccia ogni secondo (per mostrare i secondi nel cronometro)
 setInterval(aggiornaInterfaccia, 1000);
 
+// ============================================
+// CURSORE CUSTOM CON ANIMAZIONE AL CLICK
+// ============================================
+const customCursor = document.querySelector('.custom-cursor');
+
+// Lista di file audio (caricata dinamicamente da `stop/list.json`)
+let audioFiles = [];
+
+// Carica il manifest dei file audio (non mettere i nomi direttamente nel codice)
+fetch('stop/list.json')
+  .then(res => res.json())
+  .then(list => {
+    if (Array.isArray(list) && list.length) audioFiles = list;
+  })
+  .catch(err => console.warn('Impossibile caricare stop/list.json:', err));
+
+// Funzione per riprodurre audio casuale (usa `audioFiles` caricati dal manifest)
+function playRandomAudio() {
+  if (!audioFiles || audioFiles.length === 0) {
+    console.warn('Nessun file audio disponibile.');
+    return;
+  }
+  const randomIndex = Math.floor(Math.random() * audioFiles.length);
+  // Usa encodeURIComponent per gestire spazi e caratteri speciali nei nomi file
+  const audioPath = 'stop/' + encodeURIComponent(audioFiles[randomIndex]);
+  const audio = new Audio(audioPath);
+  audio.play().catch(err => console.log('Audio play error:', err));
+}
+
+// Segui il mouse
+document.addEventListener('mousemove', (e) => {
+  customCursor.style.left = e.clientX + 'px';
+  customCursor.style.top = e.clientY + 'px';
+});
+
+// Ingrandisci al click e riproduci audio
+document.addEventListener('click', () => {
+  customCursor.classList.remove('enlarged');
+  // Trigger reflow
+  void customCursor.offsetWidth;
+  customCursor.classList.add('enlarged');
+  
+  // Riproduci audio casuale
+  playRandomAudio();
+  
+  // Tolgi la classe dopo l'animazione
+  setTimeout(() => {
+    customCursor.classList.remove('enlarged');
+  }, 200);
+});
 

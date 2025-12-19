@@ -9,6 +9,26 @@ body {
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: none;
+}
+
+/* Cursore custom */
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  font-size: 40px;
+  line-height: 1;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: font-size 200ms ease-out;
+}
+
+.custom-cursor.enlarged {
+  font-size: 60px;
 }
 
 .container {
