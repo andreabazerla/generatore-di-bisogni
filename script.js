@@ -377,10 +377,10 @@ function createStopSign() {
   bubble.setAttribute('role', 'dialog');
   bubble.setAttribute('aria-hidden', 'true');
   bubble.innerHTML = `
-    <span>Ciao Valentina! 👋 Sono Andrea 😊</span>
-    <span>, e ti do il benvenuto nel primo generatore di bisogni casuali. 🎁</span><br><br>
-    <span>Ti ho dedicato questo sito come pensiero scherzoso per Natale 2025, 🎄 per ricordarti quanto mi preoccupo per te anche quando non siamo vicini. 💕</span><br><br>
-    <span>Spero che ti piaccia! Buon Natale amore, ti amo ❤️</span>
+    <span>Ciao Valentina!👋 Sono Andrea 😊</span><br>
+    <span>Benvenuta nel primo generatore di bisogni casuali al mondo! ✨</span><br>
+    <span>Ti dedico questo sito web come pensiero (scherzoso) per Natale 2025🎄per ricordarti quanto tenga a te, anche quando non siamo vicini vicini. 💕</span><br>
+    <span>Spero che ti faccia sorridere! Buon Natale amore mio, ti amo ❤️</span>
   `;
   document.body.appendChild(bubble);
 
